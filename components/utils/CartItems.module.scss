@@ -1,0 +1,47 @@
+.container {
+  width: 100%;
+  max-width: 100%;
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding-bottom: 0;
+  background-color: white;
+  @media (max-width: 1024px) {
+    margin: 10px 0;
+  }
+}
+
+.productDetails {
+  display: flex;
+  justify-content: space-between;
+  p {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 5px 0;
+  }
+}
+
+.buttons {
+  max-width: 100%;
+  display: flex;
+  border-top: 2px solid rgba(0, 0, 0, 0.04);
+
+  margin: 0 10px;
+  button {
+    user-select: none;
+    cursor: pointer;
+    background-color: white;
+    border: 0;
+    padding: 15px 10px;
+    color: gray;
+    &:nth-child(1) {
+      width: 40%;
+      border-right: 2px solid rgba(0, 0, 0, 0.04);
+    }
+    &:nth-child(2) {
+      width: 60%;
+    }
+  }
+}
