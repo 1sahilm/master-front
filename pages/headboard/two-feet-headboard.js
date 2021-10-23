@@ -9,7 +9,7 @@ import Menu from '../../components/Menu';
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import ProductBox from "../../components/comps/ProductBox";
+import HeadboardBox from "../../components/comps/HeadboardBox";
 import { useRouter } from "next/router";
 
 
@@ -20,7 +20,7 @@ const options = [
 ];
 
 
-function Chairbed({response}){
+function Twofeetheadboard({response}){
   const router = useRouter();
   console.log(response);
  
@@ -207,16 +207,18 @@ function Chairbed({response}){
 
   
 <div className="row">
-                {response.map((item) => {
-                  console.log(item);
-                  return (
-                    <ProductBox
-                      src={item.images[0].color1.base_url}
-                      title={item.product_name}
-                      price={item.price}
-                    />
-                  );
-                })}
+{
+          response.map((item) =>{
+              console.log(item);
+              return(
+                  <HeadboardBox
+                   src={item.images[0].url}
+                   title={item.product_name}
+                   price={item.price} 
+                   />
+              );
+          })
+      }
               </div>
               </div>
      </div>
@@ -280,22 +282,22 @@ Another advantage to divans is that they don’t take up too much space as the b
         </div>
     )
 }
-export default Chairbed;
+export default Twofeetheadboard;
 export async function getServerSideProps(context) {
-  const { req } = context;
-  const size = req?.__NEXT_INIT_QUERY?.size;
-  let sizes = "";
-
-  size ? (sizes = size) : (sizes = "2FT 6");
-  const data = await axios.post(
-    "http://localhost:3000/api/sofa/getbeds",
-    {
-      method: "size",
-      value: sizes,
-    }
-  );
-  const response = data.data.data;
-  return {
-    props: { response }, // will be passed to the page component as props
-  };
+    const { req } = context;
+    const size = req?.__NEXT_INIT_QUERY?.size;
+    let sizes = "";
+  
+    size ? (sizes = size) : (sizes = "2FT 6");
+    const data = await axios.post(
+      "http://localhost:3000/api/headboard/getbeds",
+      {
+        method: "size",
+        value: sizes,
+      }
+    );
+    const response = data.data.data;
+    return {
+        props: { response }, // will be passed to the page component as props
+      };
 }

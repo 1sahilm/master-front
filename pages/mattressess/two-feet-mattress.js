@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import ProductBox from "../../components/comps/ProductBox";
 import { useRouter } from "next/router";
+import MattressBox from "../../components/comps/MattressBox";
 
 
 
@@ -20,7 +21,7 @@ const options = [
 ];
 
 
-function Chairbed({response}){
+function Twofeetmattress({response}){
   const router = useRouter();
   console.log(response);
  
@@ -210,8 +211,9 @@ function Chairbed({response}){
                 {response.map((item) => {
                   console.log(item);
                   return (
-                    <ProductBox
-                      src={item.images[0].color1.base_url}
+                    <MattressBox
+                      category={item.category}
+                      src={item.images}
                       title={item.product_name}
                       price={item.price}
                     />
@@ -280,22 +282,22 @@ Another advantage to divans is that they don’t take up too much space as the b
         </div>
     )
 }
-export default Chairbed;
+export default Twofeetmattress;
 export async function getServerSideProps(context) {
-  const { req } = context;
-  const size = req?.__NEXT_INIT_QUERY?.size;
-  let sizes = "";
-
-  size ? (sizes = size) : (sizes = "2FT 6");
-  const data = await axios.post(
-    "http://localhost:3000/api/sofa/getbeds",
-    {
-      method: "size",
-      value: sizes,
-    }
-  );
-  const response = data.data.data;
-  return {
-    props: { response }, // will be passed to the page component as props
-  };
+    const { req } = context;
+    const size = req?.__NEXT_INIT_QUERY?.size;
+    let sizes = "";
+  
+    size ? (sizes = size) : (sizes = "2FT 6");
+    const data = await axios.post(
+      "http://localhost:3000/api/mattress/getbeds",
+      {
+        method: "size",
+        value: sizes,
+      }
+    );
+    const response = data.data.data;
+    return {
+        props: { response }, // will be passed to the page component as props
+      };
 }

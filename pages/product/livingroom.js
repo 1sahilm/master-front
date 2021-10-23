@@ -242,7 +242,7 @@ function Sofa({response}) {
               console.log(item);
               return(
                   <Livingroom
-                   src={item.images}
+                   src={item.images[0]}
                    title={item.product_name}
                    price={item.price} 
                    />

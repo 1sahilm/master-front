@@ -20,7 +20,7 @@ const options = [
 ];
 
 
-function Chairbed({response}){
+function Threefeetbed({response}){
   const router = useRouter();
   console.log(response);
  
@@ -280,22 +280,22 @@ Another advantage to divans is that they don’t take up too much space as the b
         </div>
     )
 }
-export default Chairbed;
+export default Threefeetbed;
 export async function getServerSideProps(context) {
-  const { req } = context;
-  const size = req?.__NEXT_INIT_QUERY?.size;
-  let sizes = "";
-
-  size ? (sizes = size) : (sizes = "2FT 6");
-  const data = await axios.post(
-    "http://localhost:3000/api/sofa/getbeds",
-    {
-      method: "size",
-      value: sizes,
-    }
-  );
-  const response = data.data.data;
-  return {
-    props: { response }, // will be passed to the page component as props
-  };
+    const { req } = context;
+    const size = req?.__NEXT_INIT_QUERY?.size;
+    let sizes = "";
+  
+    size ? (sizes = size) : (sizes = "3FT");
+    const data = await axios.post(
+      "https://staggingx.bedsdivans.co.uk/api/products/getbeds",
+      {
+        method: "size",
+        value: sizes,
+      }
+    );
+    const response = data.data.data;
+    return {
+        props: { response }, // will be passed to the page component as props
+      };
 }

@@ -13148,7 +13148,7 @@ color: #262884;
     padding: .375rem 1.75rem !important;
     border: 1px solid #262884 !important;
     min-height: 48px !important;
-    margin-top: 8px !important;
+    /* margin-top: 8px !important; */
 }
 .login-button{
     border: 2px solid #262884;
@@ -23012,16 +23012,9 @@ nav.newTab.nav.nav-tabs a.active {
 }
 
     /* End banner bottom */
-
-    .cartfordesktop{
-        position: relative;
-        top: 22px;
-    left: 78px;
-    }
     .whislist{
         position: relative;
-    left: 31px;
-    top: 35px;
+    top: 5px;
     width: 26px;
     }
 .color-tab{
@@ -23272,6 +23265,22 @@ nav.newTab.nav.nav-tabs a.active {
         margin-top: 36px;
         box-shadow: -1px 3px 6px 1px #7c7c7c;
     }
+
+.MuiList-padding li  {
+    width: 100% !important;
+}
+.search-btn{
+    background: #041f5d !important;
+    border-radius: 0 !important;
+    border-color: #041f5d !important;
+    border: 0;
+    height: 100%;
+}
+.category-dropdown{
+    border-radius: 0 !important;
+}
+      
+      
 
   
   

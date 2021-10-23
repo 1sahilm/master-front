@@ -7,8 +7,17 @@ import { useRouter } from "next/router";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useSelector } from "react-redux";
 import axios from "axios";
-
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 export default function Header() {
+  const [category, setAge] = React.useState('');
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
   const router = useRouter();
   const cart = useSelector((state) => state.cart);
 
@@ -127,7 +136,193 @@ export default function Header() {
                   </Link>
                 </div>
               </div>
-              <div className="col-md-6 align-self-center">
+              {/* New search start */}
+              
+              
+{/* New search end */}
+<div className="col-7 align-self-center" style={{marginTop:"10px"}}>
+<div class="input-group ">
+  <input type="text" class="form-control col-8" onChange={(e) => setQuery(e.target.value)}  placeholder="Search for product"/>
+  <ul
+                      className="search_suggestions"
+                      style={{ display: query ? "block" : "none" }}
+                    >
+                      {autocomplete.length ? (
+                        autocomplete.map((suggestion) => (
+                          <li
+                          
+                            key={suggestion._id}
+                            onClick={() =>
+                              handleRoute(
+                                suggestion.type,
+                                suggestion.product_name
+                              )
+                            }
+                          >
+                            {suggestion.product_name}
+                            <span>in {suggestion.type}</span>
+                          </li>
+                        ))
+                      ) : (
+                        <p style={{ textAlign: "center" }}>
+                          Oops, No Result Found
+                        </p>
+                      )}
+                      <li
+                        style={{
+                          textAlign: "center",
+                          color: "grey",
+                          padding: 5,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: 12,
+                        }}
+                        onClick={() =>
+                          handleRoute(
+                            suggestion.category,
+                            suggestion.product_name
+                          )
+                        }
+                      >
+                        view all results{" "}
+                      </li>
+                    </ul>
+  <div class="input-group-append col-4 p-0">
+  <select class="form-control category-dropdown" id="sel1">
+    <option>Divan Bed</option>
+    <option>All Bed</option>
+    <option>Headboard</option>
+    <option>Mattress</option>
+    <option>Sofa</option>
+    <option>Garden Furniture</option>
+    <option>Living room furniture</option>
+    <option>Dining set</option>
+  </select>
+    <button
+                        className="btn btn-danger search-btn"
+                        type="submit"
+                        onClick={handleSearch}
+                      >
+                        <img
+                          src="/assets/images/image/Icon material-search.png"
+                          style={{ height: "22px", opacity: "0.9" }}
+                          alt="bedsdivans"
+                        />
+                      </button>
+  </div>
+</div>
+
+</div>
+
+
+
+
+{/* <div className="col-md-4 align-self-center">
+<input
+                        className="form-control"
+                        placeholder="Search"
+                        type="text"
+                        onChange={(e) => setQuery(e.target.value)}
+                      /> 
+                      <ul
+                      className="search_suggestions"
+                      style={{ display: query ? "block" : "none" }}
+                    >
+                      {autocomplete.length ? (
+                        autocomplete.map((suggestion) => (
+                          <li
+                            key={suggestion._id}
+                            onClick={() =>
+                              handleRoute(
+                                suggestion.type,
+                                suggestion.product_name
+                              )
+                            }
+                          >
+                            {suggestion.product_name}
+                            <span>in {suggestion.type}</span>
+                          </li>
+                        ))
+                      ) : (
+                        <p style={{ textAlign: "center" }}>
+                          Oops, No Result Found
+                        </p>
+                      )}
+                      <li
+                        style={{
+                          textAlign: "center",
+                          color: "grey",
+                          padding: 5,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: 12,
+                        }}
+                        onClick={() =>
+                          handleRoute(
+                            suggestion.category,
+                            suggestion.product_name
+                          )
+                        }
+                      >
+                        view all results{" "}
+                      </li>
+                    </ul>
+  
+  </div> */}
+  {/* <div className="col-1 align-self-center">
+  <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={category}
+          label="Category"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+    
+    </div> */}
+    {/* <div className="col-1 align-self-center">
+    <button
+                        className="submit"
+                        type="submit"
+                        onClick={handleSearch}
+                      >
+                        <img
+                          src="/assets/images/image/Icon material-search.png"
+                          style={{ height: "22px", opacity: "0.9" }}
+                          alt="bedsdivans"
+                        />
+                      </button>
+    </div> */}
+  
+  {/* <Box >
+      <FormControl >
+        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Age"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box> */}
+
+
+              {/* <div className="col-md-6 align-self-center">
                 <div className="header-actions search-section">
                   <div className="header_search-form">
                     <form className="action-form" action="#">
@@ -136,8 +331,24 @@ export default function Header() {
                         placeholder="Search"
                         type="text"
                         onChange={(e) => setQuery(e.target.value)}
-                      />
-                      <button
+                      /> */}
+                      {/* <Box >
+                      <FormControl >
+                        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                        <Select
+                          labelId="demo-simple-select-label"
+                          id="demo-simple-select"
+                          value={age}
+                          label="Age"
+                          onChange={handleChange}
+                        >
+                          <MenuItem value={10}>Ten</MenuItem>
+                          <MenuItem value={20}>Twenty</MenuItem>
+                          <MenuItem value={30}>Thirty</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Box> */}
+                      {/* <button
                         className="submit"
                         type="submit"
                         onClick={handleSearch}
@@ -195,8 +406,8 @@ export default function Header() {
                     </ul>
                   </div>
                 </div>
-              </div>
-              <div className="col-md-2">
+              </div> */}
+              <div className="col-md-2 align-self-center">
                 <div className="cartfordesktop">
                   <div className="header-actions">
                     <div className="header-bottom-set dropdown">
@@ -225,7 +436,7 @@ export default function Header() {
                 </div>
               </div>
 
-              <div className="col-md-2">
+              <div className="col-md-1 align-self-center">
                 <div className="whislist">
                   <Image
                     width={40}
@@ -405,34 +616,34 @@ export default function Header() {
                               </a>
                             </li>
                             <li>
-                              <a href="single-product.html">
-                                Small Single (2?6)
-                              </a>
+                              <Link href="/divanbed/two-feet-bed">
+                                Small Single (2'6ft)
+                              </Link>
                             </li>
                             <li>
-                              <a href="single-product-variable.html">
-                                Single (3?0)
-                              </a>
+                              <Link href="/divanbed/three-feet-bed">
+                                Single (3ft)
+                              </Link>
                             </li>
                             <li>
-                              <a href="single-product-affiliate.html">
-                                Small Double (4?0)
-                              </a>
+                              <Link href="/divanbed/four-feet-bed">
+                                Small Double (4ft)
+                              </Link>
                             </li>
                             <li>
-                              <a href="single-product-group.html">
-                                Double (4?6)
-                              </a>
+                              <Link href="/divanbed/four-six-feet-bed">
+                                Double (4'6ft)
+                              </Link>
                             </li>
                             <li>
-                              <a href="single-product-tabstyle-2.html">
-                                King (5?0)
-                              </a>
+                              <Link href="/divanbed/five-feet-bed">
+                                King (5ft)
+                              </Link>
                             </li>
                             <li>
-                              <a href="single-product-tabstyle-3.html">
-                                Super King (6?0)
-                              </a>
+                              <Link href="/divanbed/six-feet-bed">
+                                Super King (6ft)
+                              </Link>
                             </li>
                           </ul>
                           <ul
@@ -445,9 +656,9 @@ export default function Header() {
                               </a>
                             </li>
                             <li>
-                              <a href="shop-3-column.html">
+                            <Link href="/divanbed/linen-Fabric-Divan-Beds">
                                 Linen Fabric Divan Beds
-                              </a>
+                              </Link>
                             </li>
                           </ul>
                         </li>
@@ -513,29 +724,29 @@ export default function Header() {
                           </ul>
                           <ul className="d-block">
                             <li className="title1">
-                              <a href="#" style={{ color: "#262884" }}>
-                                <b>Ottoman Beds</b>
-                              </a>
+                              <Link href="/allbed/ottoman-bed" style={{ color: "#262884" }}>
+                                Ottoman Beds
+                              </Link>
                             </li>
                             <li className="title1">
-                              <a href="#" style={{ color: "#262884" }}>
-                                <b>Kids Beds</b>
-                              </a>
+                              <Link href="/allbed/kids-bed" style={{ color: "#262884" }}>
+                                Kids Beds
+                              </Link>
                             </li>
                             <li className="title1">
-                              <a href="#" style={{ color: "#262884" }}>
-                                <b>Leather beds</b>
-                              </a>
+                              <Link href="/allbed/leaher-bed" style={{ color: "#262884" }}>
+                                Leather beds
+                              </Link>
                             </li>
                             <li className="title1">
-                              <a href="#" style={{ color: "#262884" }}>
-                                <b>Nevada Beds</b>
-                              </a>
+                              <Link href="/allbed/nevada-bed" style={{ color: "#262884" }}>
+                                Nevada Beds
+                              </Link>
                             </li>
                             <li className="title1">
-                              <a href="#" style={{ color: "#262884" }}>
-                                <b>Storage Bed</b>
-                              </a>
+                              <Link href="/allbed/storage-bed" style={{ color: "#262884" }}>
+                                 Storage Bed 
+                              </Link>
                             </li>
                           </ul>
                           <ul
@@ -548,29 +759,29 @@ export default function Header() {
                               </a>
                             </li>
                             <li>
-                              <a href="shop-3-column.html">
+                              <Link href="/divanbed/linen-Fabric-Divan-Beds">
                                 Linen Fabric Divan Beds
-                              </a>
+                              </Link>
                             </li>
                             <li>
-                              <a href="shop-4-column.html">
+                              <Link href="/divanbed/velvet-Fabric-Divan-Beds">
                                 Velvet Fabric Divan Beds
-                              </a>
+                              </Link>
                             </li>
                             <li>
-                              <a href="shop-left-sidebar.html">
+                              <Link href="/divanbed/velvet-Fabric-Divan-Beds">
                                 Suede Fabric Divan Bed
-                              </a>
+                              </Link>
                             </li>
                             <li>
-                              <a href="shop-right-sidebar.html">
+                              <Link href="/divanbed/suede-Fabric-Divan-Beds">
                                 Low Divan Beds
-                              </a>
+                              </Link>
                             </li>
                             <li>
-                              <a href="shop-right-sidebar.html">
+                              <Link href="/divanbed/leather-Divan-Beds">
                                 Leather Divan Beds
-                              </a>
+                              </Link>
                             </li>
                             <li>
                               <a
@@ -637,34 +848,34 @@ export default function Header() {
                               </a>
                             </li>
                             <li>
-                              <a href="single-product.html">
-                                Small Single (2?6)
-                              </a>
+                              <Link href="/headboard/two-feet-headboard">
+                                Small Single (2'6ft)
+                              </Link>
                             </li>
                             <li>
-                              <a href="single-product-variable.html">
-                                Single (3?0)
-                              </a>
+                              <Link href="/headboard/three-feet-headboard">
+                                Single (3ft)
+                              </Link>
                             </li>
                             <li>
-                              <a href="single-product-affiliate.html">
-                                Small Double (4?0)
-                              </a>
+                              <Link href="/headboard/four-feet-headboard">
+                                Small Double (4ft)
+                              </Link>
                             </li>
                             <li>
-                              <a href="single-product-group.html">
-                                Double (4?6)
-                              </a>
+                              <Link href="/headboard/four-six-feet-headboard">
+                                Double (4'6ft)
+                              </Link>
                             </li>
                             <li>
-                              <a href="single-product-tabstyle-2.html">
-                                King (5?0)
-                              </a>
+                              <Link href="/headboard/five-feet-headboard">
+                                King (5ft)
+                              </Link>
                             </li>
                             <li>
-                              <a href="single-product-tabstyle-3.html">
-                                Super King (6?0)
-                              </a>
+                              <Link href="/headboard/six-feet-headboard">
+                                Super King (6ft)
+                              </Link>
                             </li>
                           </ul>
                         </li>
@@ -730,34 +941,34 @@ export default function Header() {
                               </a>
                             </li>
                             <li>
-                              <a href="single-product.html">
-                                Small Single (2'6)
-                              </a>
+                              <Link href="/mattressess/two-feet-mattress">
+                                Small Single (2'6ft)
+                              </Link>
                             </li>
                             <li>
-                              <a href="single-product-variable.html">
-                                Single (3'0)
-                              </a>
+                              <Link href="/mattressess/three-feet-mattress">
+                                Single (3ft)
+                              </Link>
                             </li>
                             <li>
-                              <a href="single-product-affiliate.html">
-                                Small Double (4'0)
-                              </a>
+                              <Link href="/mattressess/four-feet-mattress">
+                                Small Double (4ft)
+                              </Link>
                             </li>
                             <li>
-                              <a href="single-product-group.html">
-                                Double (4'6)
-                              </a>
+                              <Link href="/mattressess/four-six-feet-mattress">
+                                Double (4'6ft)
+                              </Link>
                             </li>
                             <li>
-                              <a href="single-product-tabstyle-2.html">
-                                King (5'0)
-                              </a>
+                              <Link href="/mattressess/five-feet-mattress">
+                                King (5ft)
+                              </Link>
                             </li>
                             <li>
-                              <a href="single-product-tabstyle-3.html">
-                                Super King (6'0)
-                              </a>
+                              <Link href="/mattressess/six-feet-mattress">
+                                Super King (6ft)
+                              </Link>
                             </li>
                           </ul>
                           <ul className="d-block">
